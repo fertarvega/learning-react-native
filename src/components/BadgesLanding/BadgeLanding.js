@@ -11,12 +11,12 @@ import {
 import Colors from '../../res/Colors'
 
 const Background = {
-    uri: 'https://images.pexels.com/photos/6832295/pexels-photo-6832295.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940',
+    uri: `https://images.wallpaperscraft.com/image/bird_fantastic_flight_136785_1440x2560.jpg`,
 };
 
 class BadgeLanding extends React.Component{
     handlePress = () => {
-        this.props.navigation.navigate('Badges');
+        this.props.navigation.replace('Badges');
     };
 
     render(){
@@ -46,7 +46,7 @@ const styles = StyleSheet.create({
     },
     layerColor: {
         flex: 2,
-        backgroundColor: '#5D12CA',
+        backgroundColor: 'rgba(112,0,255,0.20)',
         justifyContent: 'center',
         alignItems: 'center',
     },
