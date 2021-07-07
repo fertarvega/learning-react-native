@@ -53,6 +53,7 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: Colors.charade,
+        
     },
     badge:{
         flex: 1,
@@ -60,6 +61,7 @@ const styles = StyleSheet.create({
         width: '90%',
         backgroundColor: Colors.white,
         borderRadius: 25,
+        marginTop: 50
     },
     header:{
         width: '100%',

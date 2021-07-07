@@ -49,20 +49,20 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    padding: 16,
     borderBottomColor: Colors.zircon,
-    borderBottomWidth: 1,
   },
   row: {
     flexDirection: 'row',
     borderBottomWidth: 1,
     borderColor: Colors.white,
+    marginTop: 5
   },
   profile: {
     width: 55,
     height: 55,
     borderRadius: 50,
     resizeMode: 'cover',
+    marginBottom: 10
   },
   nameText: {
     fontSize: 20,
@@ -80,6 +80,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'flex-end',
     flexDirection: 'row',
+    marginTop: -50,
+    marginBottom: 40
   },
   editIcon: {
     height: 22,

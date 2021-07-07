@@ -163,6 +163,7 @@ const styles = StyleSheet.create({
     height: 'auto',
     backgroundColor: Colors.white,
     borderRadius: 20,
+    marginTop: 50
   },
   form: {
     paddingHorizontal: 20,
