@@ -14,9 +14,9 @@ const Background = {
     uri: `https://images.wallpaperscraft.com/image/bird_fantastic_flight_136785_1440x2560.jpg`,
 };
 
-class BadgeLanding extends React.Component{
+class BadgesLanding extends React.Component{
     handlePress = () => {
-        this.props.navigation.replace('Badges');
+        this.props.navigation.replace('BadgesTabNavigator');
     };
 
     render(){
@@ -78,4 +78,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default BadgeLanding
+export default BadgesLanding
