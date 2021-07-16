@@ -6,6 +6,7 @@ import {
 } from '@react-navigation/bottom-tabs';
 import BadgesStack from './BadgesStack';
 import Colors from '../../res/Colors';
+import FavoriteStack from '../Favorites/FavoritesStack';
 
 const Tabs = createBottomTabNavigator();
 
@@ -15,7 +16,7 @@ const BadgesTabNavigator = () => {
       tabBarOptions={{
         showLabel: false,
         tintColor: Colors.white,
-        activeTintColor: '#E57D00',
+        activeTintColor: '#FF9617',
         style: {
           backgroundColor: Colors.zircon,
         },
@@ -32,26 +33,16 @@ const BadgesTabNavigator = () => {
           ),
         }}
       />
-      <Tabs.Screen
-        name="Badges2"
-        component={BadgesStack}
+
+
+    <Tabs.Screen
+        name="Favorites"
+        component={FavoriteStack}
         options={{
           tabBarIcon: ({size, color}) => (
             <Image
               style={{tintColor: color, width: size, height: size}}
-              source={require('../../assets/home.png')}
-            />
-          ),
-        }}
-      />
-      <Tabs.Screen
-        name="Badges3"
-        component={BadgesStack}
-        options={{
-          tabBarIcon: ({size, color}) => (
-            <Image
-              style={{tintColor: color, width: size, height: size}}
-              source={require('../../assets/home.png')}
+              source={require('../../assets/notFavorite.png')}
             />
           ),
         }}

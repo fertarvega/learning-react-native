@@ -27,18 +27,22 @@ class BadgesItem extends React.Component {
           </View>
         </TouchableOpacity>
         <View style={styles.icons}>
-          <Pressable onPress={this.props.onEdit}>
-            <Image
-              style={styles.editIcon}
-              source={require('../../assets/editIcon.png')}
-            />
-          </Pressable>
-          <Pressable onPress={this.props.onDelete}>
-            <Image
-              style={styles.deleteIcon}
-              source={require('../../assets/deleteIcon.png')}
-            />
-          </Pressable>
+          {this.props.onEdit ? (
+            <Pressable onPress={this.props.onEdit}>
+              <Image
+                style={styles.editIcon}
+                source={require('../../assets/editIcon.png')}
+              />
+            </Pressable>
+          ) : null}
+          {this.props.onDelete ? (
+            <Pressable onPress={this.props.onDelete}>
+              <Image
+                style={styles.deleteIcon}
+                source={require('../../assets/deleteIcon.png')}
+              />
+            </Pressable>
+          ) : null}
         </View>
       </View>
     );
@@ -49,39 +53,43 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    borderBottomColor: Colors.zircon,
+    borderBottomColor: Colors.orange,
   },
   row: {
     flexDirection: 'row',
     borderBottomWidth: 1,
     borderColor: Colors.white,
-    marginTop: 5
+    marginTop: 5,
   },
   profile: {
     width: 55,
     height: 55,
     borderRadius: 50,
     resizeMode: 'cover',
-    marginBottom: 10
+    marginBottom: 15,
+    marginTop: 15,
   },
   nameText: {
     fontSize: 20,
     fontWeight: 'bold',
     paddingLeft: 20,
     color: Colors.white,
+  
+    marginTop: 15,
   },
   cityText: {
     fontWeight: '100',
     paddingLeft: 20,
-    color: Colors.white,
+    color: Colors.white,    
+
   },
   icons: {
     flex: 1,
     alignItems: 'center',
     justifyContent: 'flex-end',
     flexDirection: 'row',
-    marginTop: -50,
-    marginBottom: 40
+    marginTop: -55,
+    marginBottom: 40,
   },
   editIcon: {
     height: 22,

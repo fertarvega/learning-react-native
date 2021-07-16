@@ -4,7 +4,7 @@ const Colors = {
     zircon: '#3a4049',
     white: '#efefef',
     purple: "#6200E8",
-    orange: "#E89000",
+    orange: "#FF9617",
     black: "#000000",
     white: "#FFFFFF"
 };

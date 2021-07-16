@@ -49,6 +49,7 @@ const styles = StyleSheet.create({
         backgroundColor: 'rgba(112,0,255,0.20)',
         justifyContent: 'center',
         alignItems: 'center',
+        zIndex: 2
     },
     image: {
         flex: 1,
@@ -65,9 +66,10 @@ const styles = StyleSheet.create({
         padding: 15,
         marginTop: 50,
         borderRadius: 15,
-        backgroundColor: "#FFAA00",
+        backgroundColor: Colors.orange,
         borderColor: Colors.white,
         borderWidth: 1,
+        zIndex: 3
     },
     buttonText:{
         textAlign: 'center',
