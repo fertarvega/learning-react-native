@@ -4,6 +4,7 @@ import BadgesTabNavigator from '../BadgesScreen/BadgesTabNavigator';
 import BadgeLanding from '../BadgesLanding/BadgeLanding';
 import Colors from "../../res/Colors"
 import Login from "../UserScreen/BadgeLogin"
+import Signup from "../UserScreen/BadgeSignup"
 
 const Stack = createStackNavigator();
 
@@ -21,6 +22,11 @@ const AppStack = () => {
       <Stack.Screen
         name="Login"
         component={Login}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="Signup"
+        component={Signup}
         options={{headerShown: false}}
       />
       <Stack.Screen name="BadgesTabNavigator" component={BadgesTabNavigator} />

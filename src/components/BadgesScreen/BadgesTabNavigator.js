@@ -7,6 +7,7 @@ import {
 import BadgesStack from './BadgesStack';
 import Colors from '../../res/Colors';
 import FavoriteStack from '../Favorites/FavoritesStack';
+import UserStack from '../UserScreen/UserStack';
 
 const Tabs = createBottomTabNavigator();
 
@@ -16,7 +17,7 @@ const BadgesTabNavigator = () => {
       tabBarOptions={{
         showLabel: false,
         tintColor: Colors.white,
-        activeTintColor: '#FF9617',
+        activeTintColor: Colors.orange,
         style: {
           backgroundColor: Colors.zircon,
         },
@@ -43,6 +44,18 @@ const BadgesTabNavigator = () => {
             <Image
               style={{tintColor: color, width: size, height: size}}
               source={require('../../assets/notFavorite.png')}
+            />
+          ),
+        }}
+      />
+    <Tabs.Screen
+        name="Users"
+        component={UserStack}
+        options={{
+          tabBarIcon: ({size, color}) => (
+            <Image
+              style={{tintColor: color, width: size, height: size}}
+              source={require('../../assets/profile.png')}
             />
           ),
         }}

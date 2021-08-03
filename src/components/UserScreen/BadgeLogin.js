@@ -15,6 +15,7 @@ import Colors from '../../res/Colors';
 import Fonts from '../../res/Fonts';
 import UserSession from '../../libs/sessions';
 import Loader from '../Generics/Loader';
+import Signup from './BadgeSignup'
 
 class Login extends React.Component {
   state = {
@@ -30,9 +31,14 @@ class Login extends React.Component {
       this.setState({loading: true, error: null, user: undefined});
       let response = await UserSession.instance.login(this.state.form);
 
-      if (typeof response === 'object') {
-        console.log(response);
-        this.setState({loading: false, error: response, user: undefined});
+      if (typeof response == 'object') {
+        console.log(response)
+        if (response['405']) {
+         var message = 'Your account is not verified';
+        }else {
+          var message = 'Invalid username or password, try again';
+        }
+        this.setState({loading: false, error: message, user: undefined});
       } else {
         this.setState({loading: false, error: null, user: response});
       }
@@ -44,18 +50,23 @@ class Login extends React.Component {
     }
   };
 
-  // toggleIsPasswordVisible = () => {
-  //   if (this.state.isPasswordVisible) {
-  //     this.setState({isPasswordVisible: false});
-  //   } else {
-  //     this.setState({isPasswordVisible: true});
-  //   }
-  // };
+    toggleisPasswordVisible = () => {
+    if (this.state.isPasswordVisible) {
+      this.setState({isPasswordVisible: false});
+    } else {
+      this.setState({isPasswordVisible: true});
+    }
+  };
+
+  handleSignup = () => {
+    this.props.navigation.navigate('Signup');
+  };
 
   render() {
-    // if (loading === true && !user) {
-    //   return <Loader />;
-    // }
+    const {isPasswordVisible, loading, error, user} = this.state;
+    if (loading === true && !user) {
+      return <Loader />;
+    }
     return (
       <ScrollView style={Styles.Container}>
         <StatusBar backgroundColor="transparent" translucent={true} />
@@ -69,13 +80,13 @@ class Login extends React.Component {
         </View>
         <View style={Styles.FormContainer}>
           <Text style={Styles.title}>Login</Text>
-          {/* { error ? (
-            <View> 
-              <Text>
-                {'Invalid Username or Password. Please try again'}
-              </Text>
-            </View>
-          ) : null} */}
+          {error ? (
+                <View style={Styles.error}>
+                  <Text >
+                    {error}
+                  </Text>
+                </View>
+              ) : null}
           <View style={Styles.inputContainer}>
             <TextInput
               style={Styles.input}
@@ -118,8 +129,9 @@ class Login extends React.Component {
           <Text style={Styles.darkButtonText}>LOGIN</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity style={Styles.lightButton}>
-          <Text style={Styles.lightButtonText}>SIGN UP</Text>
+        <TouchableOpacity style={Styles.lightButton} onPress={this.handleSignup}>
+          <Text style={Styles.lightButtonText}
+          >SIGN UP</Text>
         </TouchableOpacity>
       </ScrollView>
     );
@@ -135,6 +147,17 @@ const Styles = StyleSheet.create({
   Container: {
     backgroundColor: Colors.purple,
     position: 'relative',
+    zIndex: 0,
+  },
+  error: {
+    backgroundColor: Colors.red,
+    marginLeft: 10,
+    paddingLeft: 10,
+    marginTop: 10,
+    paddingTop: 15,
+    marginRight: 5,
+    marginBottom: -25,
+    paddingBottom: 15,
     zIndex: 0,
   },
   FormContainer: {

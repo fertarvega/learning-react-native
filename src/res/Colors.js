@@ -6,7 +6,8 @@ const Colors = {
     purple: "#6200E8",
     orange: "#FF9617",
     black: "#000000",
-    white: "#FFFFFF"
+    white: "#FFFFFF",
+    red: "#FF9D8A"
 };
 
 export default Colors;
