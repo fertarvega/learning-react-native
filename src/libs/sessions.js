@@ -99,6 +99,34 @@ class UserSession {
       console.log('Get token error', err);
     }
   };
+
+  editProfile = async (id, token, body) => {
+    // console.log(id);
+    // console.log(token)
+    // console.log(body);
+    let uploadData = new FormData();
+    uploadData.append('profile.profile_img', {
+      type: 'image/jpeg',
+      uri: body,
+      name: 'profile.jpg',
+    });
+
+    try {
+      let request = await fetch(`${DJANGO_URL}/profile/${id}/`, {
+        method: 'PATCH',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'multipart/form-data',
+          Authorization: `Token ${token}`,
+        },
+        body: uploadData,
+      });
+      let response = await request.json();
+      return response;
+    } catch (err) {
+      console.log('Edit profile error', err);
+    }
+  };
 }
 
 export default UserSession;
