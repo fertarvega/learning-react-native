@@ -15,7 +15,7 @@ import Colors from '../../res/Colors';
 import Fonts from '../../res/Fonts';
 import UserSession from '../../libs/sessions';
 import Loader from '../Generics/Loader';
-import Signup from './BadgeSignup'
+import Signup from './BadgeSignup';
 
 class Login extends React.Component {
   state = {
@@ -26,16 +26,24 @@ class Login extends React.Component {
     form: {},
   };
 
+  componentDidMount = () => {
+    this.deleteTokens();
+  };
+
+  deleteTokens = async () => {
+    await UserSession.instance.logout();
+  };
+
   handleSubmit = async () => {
     try {
       this.setState({loading: true, error: null, user: undefined});
       let response = await UserSession.instance.login(this.state.form);
 
       if (typeof response == 'object') {
-        console.log(response)
+        console.log(response);
         if (response['405']) {
-         var message = 'Your account is not verified';
-        }else {
+          var message = 'Your account is not verified';
+        } else {
           var message = 'Invalid username or password, try again';
         }
         this.setState({loading: false, error: message, user: undefined});
@@ -50,7 +58,7 @@ class Login extends React.Component {
     }
   };
 
-    toggleisPasswordVisible = () => {
+  toggleisPasswordVisible = () => {
     if (this.state.isPasswordVisible) {
       this.setState({isPasswordVisible: false});
     } else {
@@ -81,12 +89,10 @@ class Login extends React.Component {
         <View style={Styles.FormContainer}>
           <Text style={Styles.title}>Login</Text>
           {error ? (
-                <View style={Styles.error}>
-                  <Text >
-                    {error}
-                  </Text>
-                </View>
-              ) : null}
+            <View style={Styles.error}>
+              <Text>{error}</Text>
+            </View>
+          ) : null}
           <View style={Styles.inputContainer}>
             <TextInput
               style={Styles.input}
@@ -129,9 +135,10 @@ class Login extends React.Component {
           <Text style={Styles.darkButtonText}>LOGIN</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity style={Styles.lightButton} onPress={this.handleSignup}>
-          <Text style={Styles.lightButtonText}
-          >SIGN UP</Text>
+        <TouchableOpacity
+          style={Styles.lightButton}
+          onPress={this.handleSignup}>
+          <Text style={Styles.lightButtonText}>SIGN UP</Text>
         </TouchableOpacity>
       </ScrollView>
     );
