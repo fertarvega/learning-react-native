@@ -34,6 +34,7 @@ class Login extends React.Component {
     await UserSession.instance.logout();
   };
 
+  //Send the login information
   handleSubmit = async () => {
     try {
       this.setState({loading: true, error: null, user: undefined});
@@ -58,6 +59,7 @@ class Login extends React.Component {
     }
   };
 
+  //Show or hide the password
   toggleisPasswordVisible = () => {
     if (this.state.isPasswordVisible) {
       this.setState({isPasswordVisible: false});
@@ -66,6 +68,7 @@ class Login extends React.Component {
     }
   };
 
+  //Change to the sing up
   handleSignup = () => {
     this.props.navigation.navigate('Signup');
   };

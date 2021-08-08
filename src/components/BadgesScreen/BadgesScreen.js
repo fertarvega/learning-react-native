@@ -22,28 +22,32 @@ class BadgesScreen extends React.Component {
     badgesCopy: undefined,
   };
 
+  //We call the next functions to fetch the data and call the intervals
   componentDidMount() {
     this.fetchdata();
     this.focusEvent();
     this.blurEvent();
   }
-
+ //Fetch the interval calling the function to do it
   focusEvent = () => {
     this.focusListener = this.props.navigation.addListener('focus', () => {
       this.setFetchInterval();
     });
   };
 
+  //Clear the interval
   blurEvent = () => {
     this.blurListener = this.props.navigation.addListener('blur', () => {
       clearInterval(this.interval);
     });
   };
 
+  //Fetch the interval every 3 seconds
   setFetchInterval = () => {
     this.interval = setInterval(this.fetchdata, 3000);
   };
 
+  //Get all badges
   fetchdata = async () => {
     this.setState({loading: true});
     let response = await Http.instance.get_all();
@@ -51,14 +55,17 @@ class BadgesScreen extends React.Component {
     this.setState({loading: false, badges: response, badgesCopy: response});
   };
 
+  //Show the user badge screen
   handlePress = item => {
     this.props.navigation.navigate('BadgesDetail', {item});
   };
 
+  //Show the edit badge screen
   handleEdit = item => {
     this.props.navigation.navigate('BadgesEdit', {item});
   };
 
+  //Handle if we did a change or some change appears
   handleChange = query => {
     const {badgesCopy} = this.state;
 
@@ -76,6 +83,7 @@ class BadgesScreen extends React.Component {
 
   };
 
+  //Delete the badge 
   handleDelete = item => {
     Alert.alert(
       'Are you sure?',
@@ -103,6 +111,7 @@ class BadgesScreen extends React.Component {
     );
   };
 
+  //Call the events focus and blur listener
   componentWillUnmount() {
     this.focusListener();
     this.blurListener();

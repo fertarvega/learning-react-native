@@ -16,10 +16,12 @@ class BadgesDetail extends React.Component {
     isFavorite: false,
   };
 
+  //First, we call the getBadge function
   componentDidMount() {
     this.getBadge();
   }
 
+  //We get the badges information
   getBadge = () => {
     const {item} = this.props.route.params;
     this.setState({badge: item}, () => {
@@ -28,6 +30,7 @@ class BadgesDetail extends React.Component {
     this.props.navigation.setOptions({title: item.name});
   };
 
+  //Gets favorite is to get the id from the badge and save it on the local storage
   getFavorite = async () => {
     try {
       const key = `favorite-${this.state.badge._id}`
@@ -40,6 +43,7 @@ class BadgesDetail extends React.Component {
     }
   }
 
+  //We enter the state depending on the favorite button
   toggleFavorite = () => {
     if (this.state.isFavorite) {
       this.removeFavorite();
@@ -49,6 +53,7 @@ class BadgesDetail extends React.Component {
     }
   };
 
+  //Adds the badge user to the favorite screen
   addFavorite = async () => {
     const badge = JSON.stringify(this.state.badge);
     const key = `favorite-${this.state.badge._id}`;
@@ -60,6 +65,7 @@ class BadgesDetail extends React.Component {
     }
   };
 
+  //We remove the favorite deleting the id from the storage
   removeFavorite = async () => {
     const key = `favorite-${this.state.badge._id}`;
     await Storage.instance.remove(key);

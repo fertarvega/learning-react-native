@@ -18,11 +18,13 @@ class Favorites extends React.Component {
     badges: undefined,
   };
 
+  //Get all functions for favorites
   componentDidMount() {
     this.getFavorites();
     this.focusEvent();
   }
 
+  //Get all favorites and save the ids on the local storage
   getFavorites = async () => {
     this.setState({loading: true, badges: undefined})
     try {
@@ -36,16 +38,19 @@ class Favorites extends React.Component {
     }
   };
 
+  //Show details for each badge
   handlePress = item => {
     this.props.navigation.navigate('FavoritesDetails', {item})
   }
 
+  //Get all favorites
   focusEvent = () => {
     this.focusListener = this.props.navigation.addListener('focus', () => {
       this.getFavorites();
     });
   };
 
+  //Call the function focuslistener
   componentWillUnmount = () => {
     this.focusListener();
   };

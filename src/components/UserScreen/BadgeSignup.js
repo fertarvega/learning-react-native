@@ -26,6 +26,7 @@ class BadgeSignup extends React.Component {
     form: {},
   };
 
+  //Send the signup information, handle the information from the form
   handleSubmit = async () => {
     try {
       this.setState({loading: true, user: undefined});
@@ -65,6 +66,7 @@ class BadgeSignup extends React.Component {
     }
   };
 
+  //Show or hide the password 
   toggleisPasswordVisible = () => {
     if (this.state.isPasswordVisible) {
       this.setState({isPasswordVisible: false});
@@ -72,7 +74,8 @@ class BadgeSignup extends React.Component {
       this.setState({isPasswordVisible: true});
     }
   };
-
+  
+  //Show or hide the password 
   toggleisPasswordConfVisible = () => {
     if (this.state.isPasswordConfVisible) {
       this.setState({isPasswordConfVisible: false});

@@ -25,7 +25,7 @@ class Profile extends React.Component {
     this.getUserData();
   }
 
-  
+  //Get the user data using the token
   getUserData = async () => {
     let user = await UserSession.instance.getUser();
     //console.log(user.first_name);
@@ -36,6 +36,7 @@ class Profile extends React.Component {
     //console.log(this.state);
   };
 
+  //handle the image from the local storage
   handleChooseProfileImage = async () => {
     const options = {
       includeBase64: false,
@@ -50,6 +51,7 @@ class Profile extends React.Component {
     });
   };
 
+  //with this function we send the token, the id and the picture that we upload on
   editProfilePicture = async () => {
     const {user, token, picture} = this.state;
 
@@ -89,6 +91,11 @@ class Profile extends React.Component {
             </Text>
             <Text style={styles.age}>
               {user.profile.age}
+            </Text>
+          </View>
+          <View style={{alignItems: "center"}}>
+          <Text style={styles.city}>
+              {user.profile.city}
             </Text>
           </View>
         </View>
@@ -210,6 +217,13 @@ const styles = StyleSheet.create({
     fontSize: 20,
     marginLeft: 20,
     color: Colors.zircon,
+  },
+  city: {
+    marginTop: 4,
+    fontSize: 20,
+    marginLeft: 20,
+    color: Colors.zircon,
+    marginBottom: 20
   }
 });
 
