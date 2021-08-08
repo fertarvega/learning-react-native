@@ -11,3 +11,14 @@ In this application you can create an account and login with it.
 
 ![](https://i.imgur.com/9B04zvN.png)
 ![](https://i.imgur.com/0GevkUi.png)
+
+### Install the application
+You need to clone the repository and use the next command:
+```bash
+npm install
+```
+
+After it, you need to use Android device to run the application, it could be emulated. To run the application use the next command:
+```bash
+npm run android
+```
