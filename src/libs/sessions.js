@@ -122,6 +122,7 @@ class UserSession {
         body: uploadData,
       });
       let response = await request.json();
+      console.log(response);
       return response;
     } catch (err) {
       console.log('Edit profile error', err);

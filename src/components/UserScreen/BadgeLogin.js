@@ -107,10 +107,10 @@ class Login extends React.Component {
               }}
             />
             <TextInput
+              secureTextEntry={isPasswordVisible}
               style={Styles.input}
               placeholder="Password"
-              placeholderTextColor={Colors.black}
-              // secureTextEntry={isPasswordVisible}
+              placeholderTextColor={Colors.charade}
               onChangeText={text => {
                 this.setState(prevState => {
                   let form = Object.assign({}, prevState.form);
@@ -119,16 +119,17 @@ class Login extends React.Component {
                 });
               }}
             />
-            {/* <TouchableOpacity onPress={this.toggleIsPasswordVisible}>
-              <Image 
-                style={{marginTop: 10}}
+            <TouchableOpacity style={Styles.password} onPress={this.toggleisPasswordVisible}>
+              <Image
+                style={Styles.passwordIcon}
                 source={
                   isPasswordVisible
-                    ? require('../../assets/isFavorite.png')
-                    : require('../../assets/notFavorite.png')
+                    ? require('../../assets/eye.png')
+                    : require('../../assets/closedeye.png')
                 }
               />
-            </TouchableOpacity> */}
+            </TouchableOpacity>
+
           </View>
         </View>
         <TouchableOpacity style={Styles.darkButton} onPress={this.handleSubmit}>
@@ -283,6 +284,17 @@ const Styles = StyleSheet.create({
     alignSelf: 'center',
     color: Colors.black,
   },
+  password: {
+    bottom: 50,
+    left: 90,
+    tintColor: Colors.black,
+
+  },
+
+  passwordIcon: {
+    width: 25,
+    height: 25,
+  }
 });
 
 export default Login;

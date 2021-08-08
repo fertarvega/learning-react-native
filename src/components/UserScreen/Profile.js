@@ -7,9 +7,11 @@ import {
   Image,
   TouchableOpacity,
 } from 'react-native';
-import { launchCamera, launchImageLibrary } from 'react-native-image-picker'
+import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
 import Colors from '../../res/Colors';
 import UserSession from '../../libs/sessions';
+
+var last_name_save
 
 class Profile extends React.Component {
   state = {
@@ -23,9 +25,12 @@ class Profile extends React.Component {
     this.getUserData();
   }
 
+  
   getUserData = async () => {
     let user = await UserSession.instance.getUser();
     //console.log(user.first_name);
+    last_name_save = user.last_name
+    console.log(last_name_save)
     let token = await UserSession.instance.getToken(user.username);
     this.setState({user: user, token: token});
     //console.log(this.state);
@@ -37,9 +42,11 @@ class Profile extends React.Component {
       mediaType: 'photo',
     };
     launchImageLibrary(options, response => {
-      let photo = response.assets[0].uri;
-      this.setState({picture: photo});
-      this.editProfilePicture();
+      if (!response.didCancel) {
+        let photo = response.assets[0].uri;
+        this.setState({picture: photo});
+        this.editProfilePicture();
+      }
     });
   };
 
@@ -52,11 +59,11 @@ class Profile extends React.Component {
       picture,
     );
 
-    console.log(response);
+    //console.log(response);
   };
 
   render() {
-    const {user} = this.state;
+    const {user, picture} = this.state;
     return (
       <ScrollView style={styles.container}>
         <View style={styles.content}>
@@ -66,19 +73,23 @@ class Profile extends React.Component {
           />
           <Image
             style={styles.profileImage}
-            source={{uri: `${user.profile.profile_img}`}}
+            source={{uri: picture || `${user.profile.profile_img}`}}
           />
           <TouchableOpacity
-            
-              style={styles.profileEdit}
+            style={styles.profileEdit}
             onPress={this.handleChooseProfileImage}>
             <Image
-            style={styles.iconProfileEdit}
+              style={styles.iconProfileEdit}
               source={require('../../assets/camera.png')}
             />
           </TouchableOpacity>
-          <View style={styles.form}>
-            <Text style={styles.inputText}>Don Crack {user.first_name} {user.last_name}</Text>
+          <View style={styles.userinfo}>
+            <Text style={styles.name}>
+              {user.first_name} {user.last_name}
+            </Text>
+            <Text style={styles.age}>
+              {user.profile.age}
+            </Text>
           </View>
         </View>
       </ScrollView>
@@ -113,10 +124,13 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.white,
     borderRadius: 20,
     marginTop: 50,
+
   },
-  form: {
+  userinfo: {
+    flexDirection: 'row',
+    justifyContent: 'center',
     paddingHorizontal: 20,
-    paddingVertical: 10,
+    paddingVertical: 20,
   },
   header: {
     width: '100%',
@@ -164,7 +178,6 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   profileEdit: {
-
     width: 45,
     height: 45,
     justifyContent: 'center',
@@ -175,14 +188,28 @@ const styles = StyleSheet.create({
     position: 'absolute',
     right: 85,
     top: 230,
-
   },
   iconProfileEdit: {
     tintColor: Colors.black,
     width: 30,
     height: 30,
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
+  },
+  name: {
+    
+    fontSize: 24,
+    fontWeight: 'bold',
+    justifyContent: 'center',
+    alignItems: 'center',
+    alignContent: 'center',
+    color: Colors.blackPearl,
+  },
+  age: {
+    marginTop: 4,
+    fontSize: 20,
+    marginLeft: 20,
+    color: Colors.zircon,
   }
 });
 

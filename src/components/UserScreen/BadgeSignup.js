@@ -30,7 +30,7 @@ class BadgeSignup extends React.Component {
     try {
       this.setState({loading: true, user: undefined});
       let response = await UserSession.instance.signup(this.state.form);
-      
+
       if (typeof response == 'object') {
         let errors = [];
         let cont = 0;
@@ -65,7 +65,7 @@ class BadgeSignup extends React.Component {
     }
   };
 
-  ToggleisPasswordVisible = () => {
+  toggleisPasswordVisible = () => {
     if (this.state.isPasswordVisible) {
       this.setState({isPasswordVisible: false});
     } else {
@@ -73,7 +73,7 @@ class BadgeSignup extends React.Component {
     }
   };
 
-  ToggleisPasswordConfVisible = () => {
+  toggleisPasswordConfVisible = () => {
     if (this.state.isPasswordConfVisible) {
       this.setState({isPasswordConfVisible: false});
     } else {
@@ -101,7 +101,11 @@ class BadgeSignup extends React.Component {
         </View>
         <View style={Styles.FormContainer}>
           <Text style={Styles.title}>Sign up</Text>
-          {errors ? (<View style={Styles.error}>{errors}</View>  ): null}
+          {errors ? (
+            <View style={Styles.errors}>
+              <Text>{errors}</Text>
+            </View>
+          ) : null}
           <View style={Styles.inputContainer}>
             <TextInput
               style={Styles.input}
@@ -128,6 +132,7 @@ class BadgeSignup extends React.Component {
               }}
             />
             <TextInput
+              secureTextEntry={isPasswordVisible}
               style={Styles.input}
               placeholder="Password"
               placeholderTextColor={Colors.black}
@@ -139,8 +144,22 @@ class BadgeSignup extends React.Component {
                 });
               }}
             />
+            <TouchableOpacity
+              style={Styles.password}
+              onPress={this.toggleisPasswordVisible}>
+              <Image
+                style={Styles.passwordIcon}
+                source={
+                  isPasswordVisible
+                    ? require('../../assets/eye.png')
+                    : require('../../assets/closedeye.png')
+                }
+              />
+            </TouchableOpacity>
+            
             <TextInput
-              style={Styles.input}
+              secureTextEntry={isPasswordConfVisible}
+              style={Styles.inputConf}
               placeholder="Password confirmation"
               placeholderTextColor={Colors.black}
               onChangeText={text => {
@@ -151,6 +170,18 @@ class BadgeSignup extends React.Component {
                 });
               }}
             />
+            <TouchableOpacity
+              style={Styles.password}
+              onPress={this.toggleisPasswordConfVisible}>
+              <Image
+                style={Styles.passwordIcon}
+                source={
+                  isPasswordConfVisible
+                    ? require('../../assets/eye.png')
+                    : require('../../assets/closedeye.png')
+                }
+              />
+            </TouchableOpacity>
           </View>
         </View>
         <TouchableOpacity style={Styles.darkButton} onPress={this.handleSubmit}>
@@ -172,8 +203,8 @@ const Styles = StyleSheet.create({
     position: 'relative',
     zIndex: 0,
   },
-  error: {
-    backgroundColor: Colors.red,
+  errors: {
+    //backgroundColor: Colors.red,
     marginLeft: 10,
     paddingLeft: 10,
     marginTop: 10,
@@ -185,8 +216,8 @@ const Styles = StyleSheet.create({
   },
   FormContainer: {
     marginTop: borderTop + iconSize / 2,
-    height: FormHeight,
-    width: FormWidth,
+    height: FormHeight - 50,
+    width: FormWidth - 40,
     alignSelf: 'center',
     padding: 'auto',
     backgroundColor: Colors.white,
@@ -229,6 +260,9 @@ const Styles = StyleSheet.create({
     color: Colors.blue,
   },
   input: {
+    justifyContent: 'center',
+    alignSelf: 'center',
+    alignContent: 'center',
     color: Colors.black,
 
     borderBottomColor: Colors.black,
@@ -243,7 +277,29 @@ const Styles = StyleSheet.create({
 
     width: '80%',
 
-    textAlign: 'left',
+    textAlign: 'center',
+  },
+  inputConf: {
+    justifyContent: 'center',
+    alignSelf: 'center',
+    alignContent: 'center',
+    color: Colors.black,
+
+    borderBottomColor: Colors.black,
+
+    borderBottomWidth: 1,
+
+    fontSize: Fonts.text,
+
+    paddingBottom: 0,
+
+    marginBottom: 15,
+
+    marginTop: -25,
+
+    width: '80%',
+
+    textAlign: 'center',
   },
   inputContainer: {
     alignItems: 'center',
@@ -254,7 +310,7 @@ const Styles = StyleSheet.create({
 
     height: FormHeight * 0.1,
 
-    marginTop: borderTop + iconSize / 2 + FormHeight * 0.95,
+    marginTop: borderTop + iconSize / 2 + FormHeight * 0.85,
 
     width: FormWidth * 0.6,
 
@@ -273,6 +329,16 @@ const Styles = StyleSheet.create({
   darkButtonText: {
     alignSelf: 'center',
     color: Colors.white,
+  },
+  password: {
+    bottom: 46,
+    left: 98,
+    tintColor: Colors.black,
+  },
+
+  passwordIcon: {
+    width: 25,
+    height: 25,
   },
 });
 
